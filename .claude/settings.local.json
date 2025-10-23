@@ -1,0 +1,88 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "Bash(chmod:*)",
+      "Bash(./scripts/generate-env-config.sh:*)",
+      "Bash(./scripts/test-env-switching.sh:*)",
+      "Bash(export SMARTECTIVE_ENV=smartective-dev)",
+      "Bash(node:*)",
+      "Bash(terraform plan:*)",
+      "Bash(terraform workspace:*)",
+      "Bash(terraform workspace select:*)",
+      "Bash(timeout 10s npm run dev)",
+      "Bash(export AMPLIFY_MONOREPO_APP_ROOT=apps/web)",
+      "Bash(export NEXT_PUBLIC_SMARTECTIVE_ENV=formtective-dev)",
+      "Bash(export NODE_ENV=production)",
+      "Bash(export SMARTECTIVE_ENV=formtective-dev)",
+      "Bash(npm run build:*)",
+      "Read(//**)",
+      "WebSearch",
+      "WebFetch(domain:platform.openai.com)",
+      "Bash(find:*)",
+      "WebFetch(domain:konvajs.org)",
+      "Bash(aws lambda list-functions:*)",
+      "Bash(aws lambda get-function:*)",
+      "Bash(make status:*)",
+      "Bash(aws logs filter-log-events:*)",
+      "Bash(awk:*)",
+      "Bash(aws dynamodb scan:*)",
+      "Bash(aws logs tail:*)",
+      "Bash(cat:*)",
+      "Bash(aws dynamodb get-item:*)",
+      "Bash(git log:*)",
+      "Bash(for file in \"apps/web/components/professional-pdf-editor.tsx\" \"apps/web/components/pdf-viewer-enhanced-shared.tsx\" \"apps/web/components/pdf-annotation-layer.tsx\" \"apps/web/components/table-interactive-annotation.tsx\")",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(done)",
+      "Bash(for file in \"apps/web/components/pdf-viewer-enhanced-shared.tsx\" \"apps/web/components/pdf-annotation-layer.tsx\" \"apps/web/components/table-interactive-annotation.tsx\")",
+      "Bash(aws logs describe-log-streams:*)",
+      "Bash(aws logs get-log-events:*)",
+      "Bash(aws lambda get-function-configuration:*)",
+      "Bash(aws apigatewayv2:*)",
+      "Bash(npx tsc:*)",
+      "Bash(unzip:*)",
+      "Bash(aws iam get-role-policy:*)",
+      "Bash(aws iam list-attached-role-policies:*)",
+      "Bash(aws iam list-role-policies:*)",
+      "Bash(aws secretsmanager describe-secret:*)",
+      "Bash(terraform state list:*)",
+      "Bash(terraform output:*)",
+      "Bash(aws secretsmanager:*)",
+      "Bash(aws lambda list-aliases:*)",
+      "Bash(aws lambda get-policy:*)",
+      "Bash(aws dynamodb list-tables:*)",
+      "Bash(aws:*)",
+      "Bash(for table in formtective-dev-organizations formtective-dev-sessions formtective-dev-templates formtective-dev-transcriptions)",
+      "Bash(do echo \"=== $table ===\")",
+      "Bash(npm test)",
+      "Bash(npm test:*)",
+      "Bash(xargs:*)",
+      "Bash(for file in __tests__/unit/handler*.test.js)",
+      "Bash(while read f)",
+      "Bash(sort:*)",
+      "Bash(sha256sum:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(terraform state show:*)",
+      "Bash(gh repo view:*)",
+      "Bash(python3:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl -s -X OPTIONS https://r7s7bndl4b.execute-api.us-east-2.amazonaws.com/v1/templates/1dc0d9e2-2558-48c4-b0d7-c5dd9ebfb6da/versions -H \"Origin: http://localhost:3000\" -H \"Access-Control-Request-Method: GET\" -H \"Access-Control-Request-Headers: Authorization,Content-Type\" -i)"
+    ],
+    "deny": [],
+    "ask": [],
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Funk.aiff"
+          }
+        ]
+      }
+    ]
+  }
+}
