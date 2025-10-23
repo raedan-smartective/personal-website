@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Playfair_Display, Source_Sans_3 } from "next/font/google"
+import { Navigation } from "@/components/navigation"
 import "./globals.css"
 
 const playfair = Playfair_Display({
@@ -18,9 +19,9 @@ const sourceSans = Source_Sans_3({
 })
 
 export const metadata: Metadata = {
-  title: "Raedan Stephens | CEO, Engineer, Communicator",
+  title: "Raedan Stephens",
   description:
-    "Personal portfolio of Raedan Stephens - CEO/CTO of Smartective, LSU Distinguished Communicator, and dual-degree student in Biological Engineering and Computer Science.",
+    "Personal portfolio of Raedan Stephens - CEO/CTO of Smartective and dual-degree student in Biological Engineering and Computer Science.",
   generator: "v0.app",
   keywords: [
     "Raedan Stephens",
@@ -51,7 +52,10 @@ html {
 }
         `}</style>
       </head>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <Navigation />
+        {children}
+      </body>
     </html>
   )
 }
