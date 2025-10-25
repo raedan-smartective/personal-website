@@ -5,7 +5,8 @@ import { motion, AnimatePresence, LayoutGroup } from "framer-motion"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, X, ChevronLeft, ChevronRight, Download } from "lucide-react"
+import { ArrowRight, X, ChevronLeft, ChevronRight, Download, Maximize2 } from "lucide-react"
+import { FullscreenViewer } from "@/components/fullscreen-viewer"
 
 interface MediaItem {
   type: "video" | "iframe" | "image"
@@ -172,7 +173,7 @@ const projects: Project[] = [
     media: [
       {
         type: "iframe",
-        src: "/DIY RFID System.pdf",
+        src: "/DIY RFID System.pdf#toolbar=0&navpanes=0&scrollbar=0",
         caption: "Poster presented at the Society for Integrative and Comparative Biology (SICB) annual conference.",
       },
     ],
@@ -222,6 +223,7 @@ const projects: Project[] = [
 export default function ProjectsPage() {
   const [expandedProject, setExpandedProject] = useState<string | null>(null)
   const [mediaIndices, setMediaIndices] = useState<Record<string, number>>({})
+  const [fullscreenMedia, setFullscreenMedia] = useState<{ src: string; type: "pdf" | "image"; rotation?: number } | null>(null)
 
   const getCurrentMediaIndex = (projectId: string) => mediaIndices[projectId] || 0
 
@@ -242,7 +244,7 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <div className="relative pt-32 pb-16 px-6 mb-12">
+      <div className="relative pt-24 lg:pt-32 pb-10 lg:pb-16 px-4 lg:px-6 mb-0 lg:mb-0">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent"></div>
         <div className="max-w-[1400px] mx-auto relative">
           <motion.div
@@ -252,10 +254,10 @@ export default function ProjectsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="font-playfair font-bold text-5xl md:text-6xl pb-2 mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <h1 className="font-playfair font-bold text-3xl md:text-5xl lg:text-6xl pb-2 mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               My Projects
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               From lab benches to cloud servers, I build systems that make complex processes clear — translating biology,
                infrastructure, and AI into tools people can actually use.
             </p>
@@ -264,7 +266,7 @@ export default function ProjectsPage() {
       </div>
 
       {/* Projects Grid */}
-      <div className="px-6 pb-20">
+      <div className="px-4 lg:px-6 pb-16 lg:pb-20">
         <div className="max-w-[1400px] mx-auto">
 
           <LayoutGroup>
@@ -332,15 +334,15 @@ export default function ProjectsPage() {
                                 </motion.p>
                               </AnimatePresence>
                             </div>
-                            <Button className="w-fit group-hover:gap-3 transition-all" variant="outline">
+                            <Button className="w-fit mt-4 group-hover:gap-3 transition-all" variant="outline">
                               Learn More
                               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                             </Button>
                           </>
                         ) : (
                           /* Expanded State */
-                          <div className="md:flex">
-                            <div className="md:w-1/3 px-6 pt-6 pb-1.5 flex flex-col justify-between">
+                          <div className="flex flex-col lg:flex-row">
+                            <div className="lg:w-1/3 px-4 lg:px-6 pt-4 lg:pt-6 pb-1.5 flex flex-col justify-between">
                               <div>
                                 <motion.h3
                                   layout="position"
@@ -415,9 +417,9 @@ export default function ProjectsPage() {
                                     {project.downloadUrl && (
                                       <div className="mb-6">
                                         <Button
-                                          variant="outline"
+                                          variant="default"
                                           asChild
-                                          className="w-fit group-hover:gap-3 transition-all"
+                                          className="w-fit bg-primary hover:bg-primary/90 text-primary-foreground group-hover:gap-3 transition-all"
                                         >
                                           <a
                                             href={project.downloadUrl}
@@ -449,11 +451,12 @@ export default function ProjectsPage() {
 
                             <AnimatePresence>
                               <motion.div
+                                layout="position"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 30, delay: 0.1 }}
-                                className="md:w-2/3 pr-6 pt-6"
+                                transition={{ type: "spring", stiffness: 500, damping: 35, delay: 0.05 }}
+                                className="lg:w-2/3 px-4 lg:pr-6 pt-4 lg:pt-6"
                               >
                                 {(() => {
                                   const currentMediaIndex = getCurrentMediaIndex(project.id)
@@ -461,9 +464,13 @@ export default function ProjectsPage() {
                                   const hasMultipleMedia = project.media.length > 1
 
                                   return (
-                                    <div className="space-y-3">
-                                      <div
-                                        className={`relative h-96 md:h-[600px] bg-gradient-to-br ${project.gradientFrom} ${project.gradientTo} rounded-lg overflow-hidden`}
+                                    <motion.div
+                                      layout="position"
+                                      className="space-y-3"
+                                    >
+                                      <motion.div
+                                        layout="position"
+                                        className={`relative h-64 md:h-96 lg:h-[600px] min-h-[16rem] md:min-h-[24rem] lg:min-h-[600px] bg-gradient-to-br ${project.gradientFrom} ${project.gradientTo} rounded-lg overflow-hidden`}
                                       >
                                         {currentMedia.type === "video" ? (
                                           <video
@@ -478,26 +485,56 @@ export default function ProjectsPage() {
                                             Your browser does not support the video tag.
                                           </video>
                                         ) : currentMedia.type === "image" ? (
-                                          <img
-                                            key={currentMedia.src}
-                                            src={currentMedia.src}
-                                            alt={project.name}
-                                            className="w-full h-full object-contain"
-                                            style={{
-                                              transform: currentMedia.rotation
-                                                ? `rotate(${currentMedia.rotation}deg) scale(1.5)`
-                                                : undefined,
-                                            }}
-                                          />
+                                          <>
+                                            <img
+                                              key={currentMedia.src}
+                                              src={currentMedia.src}
+                                              alt={project.name}
+                                              className="w-full h-full object-contain"
+                                              style={{
+                                                transform: currentMedia.rotation
+                                                  ? `rotate(${currentMedia.rotation}deg) scale(1.5)`
+                                                  : undefined,
+                                              }}
+                                            />
+                                            <Button
+                                              variant="outline"
+                                              size="icon"
+                                              className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm lg:hidden"
+                                              onClick={(e) => {
+                                                e.stopPropagation()
+                                                setFullscreenMedia({
+                                                  src: currentMedia.src,
+                                                  type: "image",
+                                                  rotation: currentMedia.rotation,
+                                                })
+                                              }}
+                                            >
+                                              <Maximize2 className="w-4 h-4" />
+                                            </Button>
+                                          </>
                                         ) : (
-                                          <iframe
-                                            key={currentMedia.src}
-                                            src={currentMedia.src}
-                                            loading="lazy"
-                                            title={project.name}
-                                            allow="clipboard-write"
-                                            className="absolute inset-0 w-full h-full border-0"
-                                          />
+                                          <>
+                                            <iframe
+                                              key={currentMedia.src}
+                                              src={currentMedia.src}
+                                              loading="lazy"
+                                              title={project.name}
+                                              allow="clipboard-write"
+                                              className="absolute inset-0 w-full h-full border-0"
+                                            />
+                                            <Button
+                                              variant="outline"
+                                              size="icon"
+                                              className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm lg:hidden"
+                                              onClick={(e) => {
+                                                e.stopPropagation()
+                                                setFullscreenMedia({ src: currentMedia.src, type: "pdf" })
+                                              }}
+                                            >
+                                              <Maximize2 className="w-4 h-4" />
+                                            </Button>
+                                          </>
                                         )}
 
                                         {/* Navigation Buttons */}
@@ -527,7 +564,7 @@ export default function ProjectsPage() {
                                             </Button>
                                           </>
                                         )}
-                                      </div>
+                                      </motion.div>
 
                                       {/* Caption */}
                                       {currentMedia.caption && (
@@ -553,7 +590,7 @@ export default function ProjectsPage() {
                                           ))}
                                         </div>
                                       )}
-                                    </div>
+                                    </motion.div>
                                   )
                                 })()}
                               </motion.div>
@@ -569,6 +606,17 @@ export default function ProjectsPage() {
         </LayoutGroup>
         </div>
       </div>
+
+      {/* Fullscreen Media Viewer */}
+      {fullscreenMedia && (
+        <FullscreenViewer
+          isOpen={true}
+          onClose={() => setFullscreenMedia(null)}
+          src={fullscreenMedia.src}
+          type={fullscreenMedia.type}
+          rotation={fullscreenMedia.rotation}
+        />
+      )}
     </div>
   )
 }

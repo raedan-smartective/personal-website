@@ -21,7 +21,7 @@ const sourceSans = Source_Sans_3({
 export const metadata: Metadata = {
   title: "Raedan Stephens",
   description:
-    "Personal portfolio of Raedan Stephens - CEO/CTO of Smartective and dual-degree student in Biological Engineering and Computer Science.",
+    "Personal portfolio of Raedan Stephens - CEO of Smartective and dual-degree student in Biological Engineering and Computer Science.",
   generator: "v0.app",
   keywords: [
     "Raedan Stephens",

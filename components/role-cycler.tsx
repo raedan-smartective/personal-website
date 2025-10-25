@@ -14,19 +14,20 @@ export function RoleCycler() {
   }, [])
 
   return (
-    <div className="text-2xl md:text-3xl text-muted-foreground flex items-center text-left min-w-[450px] h-12">
-      <span className="relative whitespace-nowrap">
+    <div className="text-2xl md:text-3xl text-muted-foreground flex items-center justify-center md:justify-start mx-auto md:mx-0 h-12">
+      <div className="relative inline-block">
+        {/* Hidden spacer to define width based on longest text */}
+        <span className="invisible whitespace-nowrap">Software Development</span>
         {roles.map((role, index) => (
           <span
             key={role}
-            className={`absolute inset-0 transition-opacity duration-500 ${
-              index === currentRole ? "opacity-100" : "opacity-0"
-            }`}
+            className="absolute inset-0 whitespace-nowrap transition-opacity duration-500"
+            style={{ opacity: index === currentRole ? 1 : 0 }}
           >
             {role}
           </span>
         ))}
-      </span>
+      </div>
     </div>
   )
 }
