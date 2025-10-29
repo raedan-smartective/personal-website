@@ -61,7 +61,7 @@ const projects: Project[] = [
     problemSolved: {
       title: "Innovation",
       description:
-        "First-of-its-kind AI system specifically trained on safety terminology and compliance requirements, with custom NLP models for industrial environments.",
+        "Cutting-edge AI system leveraging best in class voice recognition and processing models to create structured compliance documentation.",
     },
     technologies: ["React", "Node.js", "OpenAI API", "WebRTC"],
     media: [
@@ -139,7 +139,7 @@ const projects: Project[] = [
       {
         type: "video",
         src: "/contralake-demo-video.mp4",
-        caption: "Demo built for hospital stakeholders and presented at a final presentation with industry leaders in Baton Rouge.",
+        caption: "Demo built for hospital stakeholders and presented at a final presentation with industry leaders in Baton Rouge. Created in collaboration with Bibhushita Baral, Faris Khattak, Myles Crockem, Sahithi Rampally, Catherine Rodriguez, and Riley Hudson.",
       },
     ],
     gradientFrom: "from-accent/20",
@@ -210,7 +210,7 @@ const projects: Project[] = [
         type: "image",
         src: "/algal-biofuel-process-diagram.png",
         rotation: 90,
-        caption: "Process flow diagram for biodiesel production from algae biomass.",
+        caption: "Process flow diagram for biodiesel production from algae biomass. Created in collaboration with Madisson Boutte, Andrew Cagle, Eddie Lowery, Cody Thompson, and Andrew Whitehead",
       },
     ],
     downloadUrl: "/Bio-Process Design Project - Biodiesel from Biomass Report.pdf",
